@@ -7,7 +7,7 @@ html {
 
 a {
     color:white;
-    text-decoration-skip-ink: all;
+    text-decoration-skip-ink: all; /* Underline skips letter descenders */
     transition:100ms;
     font-family:Heebo;
     text-decoration:none;
@@ -16,6 +16,28 @@ a {
 a:hover {
     font-weight:bold;
 }
+
+button {
+    border:none;
+    background:none;
+    color:white;
+    border-bottom:1px solid white;
+    transition:0.2s ease;
+    margin:2px;
+    padding:5px;
+    font-size:15px;
+}
+
+button:hover {
+     letter-spacing:0.1px;
+     color:lightblue;
+}
+
+button:hover .fa-arrow-right {
+    transform:translate(4px,0px) scale(1.4);
+    color:white;
+}
+
 h1 {
     font-family:Work Sans, sans-serif;
 }
@@ -47,6 +69,13 @@ ul {
     text-decoration:none;
 }
 
+
+.fa-arrow-right {
+    padding-left:2px;
+    position:relative;
+    transform:scale(1.4);
+    transition:0.2s ease;
+}
 .contact-btns { /* This is the contact button row. */
     display:flex;
     flex-direction:row;
@@ -61,19 +90,22 @@ ul {
     margin:10px;
     display:flex;
     flex-direction:row;
-    opacity:0.8;
+    opacity:0.8; /* Low opacity set; on hover, opacity will be 1 */
     transition:0.5s ease;
 }
 
-.contact-btn.second-row {
-    background:linear-gradient(45deg,#6fd288,#42c0af); 
+.contact-btn.second-row {/* for second contact btn */
+    background:linear-gradient(45deg, #6fd288, #42c0af); 
 }
 
 .contact-btn:hover {
     opacity:1;
+    border-radius:15px;
+    transform:scale(1.1);
     border-radius:18px;
     transform:scale(1);
     font-weight:500;
+    max-height:fit-content;
 }
 
 .contact-btn .contact-tooltip {
@@ -89,22 +121,16 @@ ul {
     left:-50px;
     opacity: 0;
     transition: 0.5s;
+    transform:translate(0px,30px);
+    overflow:hidden;
 }
 
-.contact-btn .contact-tooltip::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: black transparent transparent transparent;
-}
 .contact-btn:hover .contact-tooltip {
     visibility: visible;
     opacity: 1;
+    max-height:fit-content;
     font-weight:400;
+    transform:translate(0px,0px);
   }
 
 .fa-bars {
@@ -113,17 +139,17 @@ ul {
 	text-align: center;
 	display: none;
 	cursor: pointer;
-	position: absolute;
-	z-index: 500;
+	position: absolute; /* Bypasses other elements' collisions */
+	z-index: 50;
 	width: 40px;
 	height: 40px;
-    border-radius: 3px;
-    line-height:40px;
-    padding:0;
-    transition:cubic-bezier(.83,.01,.14,.99) 1s;
-    transform:scale(1.5);
-    margin:20px;
-    box-shadow:0px 10px 10px rgba(0, 0, 0, 0.158)
+    	border-radius: 3px;
+    	line-height:40px; /* Vertically centers icon */
+    	padding:0;
+    	transition:ease 1s;
+    	transform:scale(1.5);
+    	margin:20px;
+    	box-shadow:0px 10px 10px rgba(0, 0, 0, 0.158);
 
 }
 
@@ -136,11 +162,10 @@ ul {
     box-shadow: -4px -4px 10px rgba(67, 67, 67, 0.5),
         inset 4px 4px 10px rgba(0, 0, 0, 0.5),
         inset -4px -4px 10px rgba(67, 67, 67, 0.3),
-        4px 4px 10px rgba(0, 0, 0, 0.3);
+        4px 4px 10px rgba(0, 0, 0, 0.3); /* cool inset shadows */
     margin:10px;
     border-radius:50%;
     background-color:rgba(0, 0, 0, 0.24);
-    transition: 1s cubic-bezier(.83,.01,.14,.99);
     width:25px;
     height:25px;
 }
@@ -148,7 +173,7 @@ ul {
 .faq-question {
   background-color: #6e6e93;
   text-align: left;
-  padding: 10px 20px;
+  padding: 10px 30px;
   font-size: 18px;
   color: rgb(255, 255, 255);
   cursor: pointer;
@@ -168,15 +193,14 @@ ul {
     margin-top:10px;
 }
 
-.footer-row { /* Bug: The footer is too fixed and blocks some content on the page. Will try to fix later */
-	width:100%;
+.footer-row { /* Bug fixed!! :D */
+    width:100%;
     height:300px;			
     background:#35354d;
-    left:0;
-    right:0;
     padding:10px;
-    border-top:#1d1d28 3px solid;
+    border-top:#1d1d28 3px solid; /* separates footer from main page */
     text-align:center;
+    padding-top:calc(50vh + 1px);
 }
 
 .footer-link {
@@ -185,7 +209,7 @@ ul {
     background:#35354d;
 }
 
-.logo {
+.logo { /* so uh the logo is positioned in a kind of forced way. its not the best way to position it so ill fix it later. */
     position:absolute;
     display:block;
     width:80px;
@@ -203,7 +227,6 @@ ul {
     right:0;
     height:fit-content;
     float:right;
-    margin-top:0px;
 }
 
 .main-content {
@@ -229,11 +252,11 @@ ul {
 
 .nav-collapsed {
     width: 100%;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     background-color: rgba(16, 16, 16, 0.92);
     transition:cubic-bezier(.82,.01,.41,.99) 1s;
-    overflow:hidden;
+    overflow:hidden; /* Just so the contents don't glitch out of the nav. */
     left:0;
     right:0;
     top:0;
@@ -245,7 +268,6 @@ ul {
     top: 25%;
     width: 100%;
     text-align: center;
-    margin-top: 30px; 
 }
 
 .nav-collapsed > ul > li {
@@ -256,13 +278,13 @@ ul {
     padding:0px;
     position: relative;
     width: 100%;
-    display: block;
+    display: inline-block;
     margin-top:40px;
 }
 
 .nav-items-list {
     width: 30%;
-    position: absolute;
+    position: absolute; /* On scroll it remains fixed */
     left: 10px;
     background: rgba(101, 96, 125, 0.6);
     padding: 8px;
@@ -274,8 +296,7 @@ ul {
 
 .nav-item {
      width:100%;
-     margin-top:10px;
-     font-stretch: condensed;
+     margin-top:10px; /* Unnecessary font-strech removed */
      transition:0.2s ease-in-out;
      text-decoration:none;
      color:white;
@@ -299,22 +320,13 @@ ul {
     text-transform:uppercase;
     text-align:center;
     width:100%;
-    transition:700ms;
+    transition:200ms linear; /* linear ease fixes some bugs */
 }
 
 .nav-item-gradient:hover {
     filter:hue-rotate(-40deg);
     transform:translateY(0px) translateX(0);
     font-weight:700;
-}
-
-.nav-item-gradient:hover .fa-plus {
-    transform:scale(1.1,1.1) rotateZ(90deg);
-    background-color:rgba(126, 126, 126, 0.274);
-    box-shadow: -4px -4px 10px rgba(67, 67, 67, 0.5),
-    inset 2px 5px 10px rgba(0, 0, 0, 0.5),
-    inset -5px -2px 10px rgba(67, 67, 67, 0.3),
-    4px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .nav-item-gradient.collapsed {
@@ -335,20 +347,17 @@ ul {
 }
 
 .web-design-credit {
- padding:1px;
- border-radius:10px;
- text-decoration:underline;
+	 padding:1px;
+	 border-radius:10px;
+	 text-decoration:underline;
 }
 
 .web-design-credit:hover {
-    box-shadow:1px 1px 3000px 300px rgba(255, 255, 255, 0.014);
+    box-shadow:1px 1px 3000px 300px rgba(255, 255, 255, 0.014); /* this is weird and inefficient so it'll be removed. */
     text-decoration:none;
 }
-  
-.web-design-credit:hover:before,
-.web-design-credit:focus:before { 
-    transform: scaleX(1.1) scaleY(1.1);
-}
+
+/* not sure what an ::after pseudoelement was doing here :/ */
 
 @media only screen and (max-width: 1500px) {
     .nav-items-list {
@@ -363,8 +372,18 @@ ul {
         display:block;
     }
 
+    .nav-items-list > ul > li {
+        display: block;
+    }
+
     .footer-row {
         margin-left:auto;
         margin-right:auto;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .nav-items-list > ul > li {
+        display: none;
     }
 }
