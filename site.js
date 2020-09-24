@@ -18,17 +18,6 @@ function navClose() { // Close navbar function
   }
 }
 
-let trig = document.getElementById('commandTitle');
-
-function showHideCommands() {
-  let table = document.getElementById('table');
-  if (table.style.display = 'none') {
-    table.style.display = 'block';
-  } else {
-    table.style.display = 'none';
-  }
-}
-
 /* The following code is based off of: https://bit.ly/32C1vfo
 Comments added by me. */
 
@@ -43,4 +32,28 @@ for (let i = 0; i < acc.length; i++) {
             content.style.maxHeight = content.scrollHeight + "px"; // If it's null, make it not null
         }
     }
+}
+
+let trig = document.getElementsByClassName("commands-title"); // command title variable
+let icon = document.getElementById("icon");
+
+  for (let i = 0; i < trig.length; i++) {
+    trig[i].onclick = function() { // When click is detected execute the following
+        let table = this.nextElementSibling; // The table content
+            if (table.style.display = 'none') {
+              table.style.display = 'block';
+              icon.classList.remove('fa-angle-down'); // changes down arrow-
+              icon.classList.add("fa-angle-up"); // to up arrow
+            } else {
+              table.style.display = 'none';
+            }
+        }
+    }
+
+function hideCommands() {
+  if (table.style.display = 'block') {
+          table.style.display = 'none'; // make it null
+          icon.classList.add('fa-angle-down'); // changes up arrow-
+          icon.classList.remove("fa-angle-up"); // to down arrow
+  }
 }
